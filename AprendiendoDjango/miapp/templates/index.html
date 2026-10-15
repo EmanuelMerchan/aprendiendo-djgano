@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block content %}
+
+    {% include "fecha-actual.html" %}
+
+    <!-- Esto es un comentario en html-->
+    
+    {% comment " Esto es un comentario en django" %}
+        <h1>Prueba comentario</h1>
+    {% endcomment %}
+
+    <h1 class="title">{{ title }}</h1>
+    <p>{{ mi_variable }}</p>
+
+    {% if nombre and nombre == 'Emanuel Merchan'%}
+        <p>{{ nombre }}</p>
+    {% else %}
+        <strong>Nombre no existe o no coincide</strong>
+    {% endif %}
+
+    <h3>Lenguajes de programación</h3>
+
+    <ul>
+        {% for lenguaje in lenguajes %}
+            <li>{{ forloop.counter }} {{ lenguaje }}</li>
+        {% empty %}
+            <p>No hay lenguajes que mostrar</p>
+        {% endfor %}
+    </ul>
+    
+    <p>Años hasta el 2050</p>
+
+{% endblock %}

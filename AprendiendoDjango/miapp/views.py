@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from miapp.models import Article, Category
 from django.db.models import Q
+from miapp.forms import FormArticle
+from django.contrib import messages
 
 # Create your views here.
 # MVC = Modelo Vista Contrlador -> Acciones (metodos)
@@ -82,6 +84,58 @@ def crear_articulo(request, title, content, public):
     articulo.save()
     return HttpResponse(f"Artículo creado: <strong> {articulo.title} - {articulo.content}</strong>")
 
+def save_article(request):
+    # No pasamos parámetros por la URL: llegan por el formulario
+    if request.method == 'POST':
+        title = request.POST['title']
+        content = request.POST['content']
+        public = request.POST['public']
+
+        articulo = Article(
+            title=title,      # campo del modelo = variable
+            content=content,
+            public=public
+        )
+        articulo.save()  # guarda en la base de datos
+        return HttpResponse(f"Artículo creado: <strong>{articulo.title} - {articulo.content}</strong>")
+    else:
+        return HttpResponse("<h2>No se ha podido crear el artículo</h2>")
+
+
+def create_article(request):
+    # Solo muestra la plantilla con el formulario
+    return render(request, 'create_article.html')
+
+def create_full_article(request):
+    if request.method == 'POST':
+        formulario = FormArticle(request.POST)
+
+        if formulario.is_valid():
+            data_form = formulario.cleaned_data  # datos ya limpios y validados
+
+            title = data_form.get('title')
+            content = data_form['content']
+            public = data_form['public']
+
+            articulo = Article(
+                title=title,
+                content=content,
+                public=public
+            )
+            articulo.save()
+
+            articulo.save()
+            messages.success(request, f'Ha creado correctamente el artículo {articulo.id}')
+            return redirect('articulos')
+
+            return redirect('articulos')  # va al listado después de guardar
+    else:
+        formulario = FormArticle()
+
+    return render(request, 'create_full_article.html', {
+        'form': formulario
+    })
+
 def articulo(request):
 
     try:
@@ -107,6 +161,7 @@ def articulos(request):
 
     articulos = Article.objects.all()
 
+    """
     articulos = Article.objects.filter(title__iexact = "articulo")
 
     articulos = Article.objects.filter(
@@ -120,7 +175,7 @@ def articulos(request):
     articulos = Article.objects.filter(
         Q(title__contains = "Primer") | Q(title__contains = "Batman")
     )
-
+    """
     return render(request, 'articulos.html', { 
 
         'articulos': articulos

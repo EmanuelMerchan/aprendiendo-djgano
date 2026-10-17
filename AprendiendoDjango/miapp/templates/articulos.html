@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Listado de Articulos
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="title">Listado de Articulos</h1>
+    <ul>
+        {% for articulo in articulos %}
+            <article class="articulo">
+                <li>
+                    <h4> {{articulo.id}}. {{articulo.title}} </h4>
+                    <span> {{articulo.created_at}}</span>
+                    {% if articulo.public %}
+                        <strong> Publicado </strgong>
+                    {% else %}
+                        <strong> Privado </strgong>
+                    {% endif %}
+                    <p> 
+                        {{articulo.content}} 
+                        <br>
+                        <a href = "{% url 'borrar' id=articulo.id %}">ELiminar</a>
+                    </p>
+                    
+                    <br>
+                </li>
+            </article>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

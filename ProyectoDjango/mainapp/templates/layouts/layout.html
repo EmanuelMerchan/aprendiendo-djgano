@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %} |- ADSO SENA</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+</head>
+<body>
+    <!-- Cabecera de la página -->
+    <header>
+        <div id="logotipo">
+            <img src="{% static 'images/logo-django.png' %}" />
+            <h1>Proyecto con Django</h1>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'index' %}">Inicio</a>
+            </li>
+            <li>
+                <a href="{% url 'about' %}">Sobre Nosotros</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        <div class="box">
+            {% block content %}
+                <strong>Contenido del bloque original</strong>
+            {% endblock %}
+        </div>
+    </div>
+
+    <footer>
+        Programación con Django - ADSO 2023 &copy; Instructor Moisés Garcia - {% now "d/m/Y h:i:s" %}
+    </footer>
+</body>
+</html>

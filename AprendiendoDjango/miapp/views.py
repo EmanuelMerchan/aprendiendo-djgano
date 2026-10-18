@@ -159,7 +159,7 @@ def editar_articulo(request, id):
 
 def articulos(request):
 
-    articulos = Article.objects.all()
+    articulos = Article.objects.filter(public=True).order_by('-id')
 
     """
     articulos = Article.objects.filter(title__iexact = "articulo")

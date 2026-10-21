@@ -9,8 +9,8 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Creado el')
 
     class Meta:
-        verbose_name: 'Categoria'
-        verbose_name_plural: 'Categorias'
+        verbose_name= 'Categoria'
+        verbose_name_plural= 'Categorias'
 
     def __str__(self):
         return self.name
@@ -26,8 +26,8 @@ class Article(models.Model):
     update_at = models.DateTimeField(auto_now=True, verbose_name='Editado el')
 
     class Meta:
-        verbose_name: 'Articulo'
-        verbose_name_plural: 'Articulos'
+        verbose_name= 'Articulo'
+        verbose_name_plural= 'Articulos'
         ordering = ['-created_at']
 
     def __str__(self):

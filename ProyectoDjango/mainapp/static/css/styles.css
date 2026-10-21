@@ -179,16 +179,20 @@ nav > ul > li:hover > ul > li:hover a{
 }
 /*ancho de los controles*/
 .box form input[type="text"],
+.box form input[type="email"],
+.box form input[type="password"],
 .box form textarea,
 .box form select{
     width: 100%;
     margin-bottom: 10px;
 }
+
 /*select*/
 .box form select{
     width: 70px;
     padding: 5px;
 }
+
 /*Boton*/
 .box form input[type="submit"],
 .box form input[type="buttom"],
@@ -201,6 +205,7 @@ nav > ul > li:hover > ul > li:hover a{
     transition: 300ms all;
     border-radius: 7px;
 }
+
 /* Color del boton cuando pase por encima */
 .box form input[type="submit"]:hover,
 .box form input[type="buttom"]:hover,
@@ -215,12 +220,18 @@ nav > ul > li:hover > ul > li:hover a{
     box-shadow: 0px 0px 4px black;
 }
 
-.messages{
-    background: #d4edda;
-    color: #155724;
-    padding: 10px;
+.messages, 
+.alert-success,
+.alert{
+    padding: 20px;
+    background: #1f7e58;
+    color: white;
+    text-align: center;
     margin-bottom: 15px;
-    border-radius: 4px;
+}
+
+.alert-warning{
+    background: #9e2506;
 }
 
 /*Estilos titulo*/
